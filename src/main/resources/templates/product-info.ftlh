@@ -6,6 +6,9 @@
 <body>
 <h1>Hello, BDSTORE!</h1><hr>
 <h4>Подробная информация о товаре</h4>
+<#list images as img>
+    <img src="/images/${img.id}" height="60px" alt=""/><br><br>
+</#list>
 <b>Название товара: </b>${product.title}
 <b>Описание товара: </b>${product.description}
 <b>Цена товара: </b>${product.price}

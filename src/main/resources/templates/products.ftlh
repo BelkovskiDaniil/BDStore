@@ -20,7 +20,7 @@
     <h3>Товаров нет</h3>
 </#list>
 <h3>Создать новый товар</h3>
-<form action = "/product/create" method="post">
+<form action = "/product/create" method="post" enctype="multipart/form-data">
     Название товара: <label>
         <input type="text" name="title"/>
     </label><br><br>
@@ -36,6 +36,9 @@
     Автор товара: <label>
         <input type="text" name="user"/>
     </label><br><br>
+    Первая фотография: <input type="file" name="file1"/><br><br>
+    Вторая фотография: <input type="file" name="file2"/><br><br>
+    Третья фотография: <input type="file" name="file3"/><br><br>
     <input type="submit" value="Добавить товар"/><br><br>
 </form>
 </body>
