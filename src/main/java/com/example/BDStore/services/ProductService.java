@@ -1,34 +1,35 @@
 package com.example.BDStore.services;
 
 import com.example.BDStore.models.Product;
-import lombok.Getter;
+import com.example.BDStore.repositories.ProductReposiroty;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
 @Service
+@Slf4j
+@RequiredArgsConstructor
 public class ProductService {
-    @Getter
-    private List<Product> products = new ArrayList<>();
-    private Long ID = 1L;
+    private final ProductReposiroty productReposiroty;
 
-    {
-        products.add(new Product(++ID,"LongStick", "Looong stick", 300, "Perm", "Belka"));
-        products.add(new Product(++ID,"ShortStick", "Shooort stick", 100, "Perm", "Belka"));
+    public List<Product> listProducts(String title) {
+        if (title != null) return productReposiroty.findByTitle(title);
+        return productReposiroty.findAll();
     }
 
     public Product getProductById(Long id) {
-        return products.stream().filter(product -> Objects.equals(product.getId(), id)).findFirst().orElse(null);
+        return productReposiroty.findById(id).orElse(null);
     }
 
     public void saveProduct(Product product) {
-        product.setId(++ID);
-        products.add(product);
+        log.info("Saving {}", product);
+        productReposiroty.save(product);
     }
 
     public void deleteProduct(Long id) {
-        products.removeIf(product -> Objects.equals(product.getId(), id));
+        productReposiroty.deleteById(id);
     }
 }
