@@ -4,7 +4,11 @@
     <title>BDSTORE</title>
 </head>
 <body>
-<h1>Hello, BDSTORE!</h1><hr>
+<h1>BDSTORE | <a href="/login">Войти</a></h1><hr>
+<form action="/logout" method="post">
+    <input type="hidden" name="_csrf" value="${_csrf.token}">
+    <input type="submit" value="Выйти">
+</form>
 <h4>Товары из Махачкалы</h4>
 <form action="/" method="get">
     Поиск по названию объявления <label>
