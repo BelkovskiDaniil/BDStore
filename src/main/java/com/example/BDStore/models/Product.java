@@ -27,8 +27,12 @@ public class Product {
     private int price;
     @Column(name = "city")
     private String city;
-    @Column(name = "user")
-    private String user;
+    /*@Column(name = "user")
+    private String user;*/
+
+    @ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.EAGER)
+    @JoinColumn
+    private User user;
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "product")
     private List<Image> images = new ArrayList<>();
