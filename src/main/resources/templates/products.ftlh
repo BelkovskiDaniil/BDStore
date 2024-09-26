@@ -4,28 +4,31 @@
     <title>BDSTORE</title>
 </head>
 <body>
-<h1>BDSTORE</h1><hr>
+<h1>BDSTORE</h1>
+<hr>
 <#if user.email??>
     <h3>Имя пользователя: <i>${user.name}</i></h3>
     <form action="/logout" method="post">
         <input type="hidden" name="_csrf" value="${_csrf.token}">
         <input type="submit" value="Выйти"/>
     </form>
+    <#if user.isAdmin()>
+        <a href="/admin">Панель администратора</a>
+    </#if>
 <#else>
     <a href="/login">Войти</a></h1>
 </#if>
-<h4>Товары из Махачкалы</h4>
+<hr>
+<h4>Товары со всей России</h4>
 <form action="/" method="get">
-    Поиск по названию объявления <label>
-        <input type="text" name="title">
-    </label>
-    <input type="submit" value="Поиск">
+    Поиск по названию объявления: <input type="text" name="title">
+    <input type="submit" value="Поиск"/>
 </form>
 <#list products as product>
     <div>
-        <p><b>${product.title}</b> ${product.price}$ | <a href="/product/${product.id}">Подробнее...</a></p>
+        <p><b>${product.title}</b> ${product.price} руб. | <a href="/product/${product.id}">Подробнее...</a></p>
     </div>
-    <#else>
+<#else>
     <h3>Товаров нет</h3>
 </#list>
 <#if user.email??>
